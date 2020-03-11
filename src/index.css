@@ -1,50 +1,164 @@
-body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
-}
+/* Dependances Start */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Raleway&display=swap');
+/* Dependances End */
 
-ol, ul {
-  padding-left: 30px;
-}
+/* Main CSS Start */
+:root
+{
+  /* Font Size Start */
+  --small-text-size: calc(var(--text-size) * 0.95);
+  --text-size: 2.2vmin;
+  --small-title-size: calc(var(--title-size) * 0.8);
+  --title-size: 5vmin;
+  /* Font Size End */
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-}
+  /* Font Family Start */
+  --text-family: 'Open Sans', sans-serif;
+  --title-family: 'Raleway', sans-serif;
+  /* Font Family End */
 
-.status {
-  margin-bottom: 10px;
+  /* Colors Start */
+  --color-primary: #5ce1e6;
+  --color-secondary: #8c52ff;
+  --color-accent: #cb6ce6;
+  /* Colors End */
 }
-
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
+*
+{
+  margin: 0;
   padding: 0;
-  text-align: center;
-  width: 34px;
-}
-
-.square:focus {
+  border: none;
   outline: none;
+  box-sizing: border-box;
+  text-decoration: inherit;
+  text-transform: inherit;
+  color: inherit;
+  list-style: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
-
-.kbd-navigation .square:focus {
-  background: #ddd;
+body
+{
+  font-size: var(--text-size);
+  color: var(--color-primary);
+  list-style: none;
+  font-family: var(--text-family);
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: none;
+  line-height: 1.5;
 }
-
-.game {
+.game-board
+{
+  width: 100%;
+  height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+}
+.status
+{
+  display: block;
+  font-size: 6vmin;
+  width: 100%;
+  text-align: center;
+  padding: 5vmin 0;
+}
+::-webkit-scrollbar 
+{
+    width: 5px;
 }
 
-.game-info {
-  margin-left: 20px;
+::-webkit-scrollbar-track 
+{
+    background: white;
 }
+
+::-webkit-scrollbar-thumb 
+{
+    background: var(--color-secondary);
+    border-radius: 25px;
+}
+/* Main CSS End */
+
+/* Game Board Start */
+.board
+{
+  margin: 0 10vmin 0 auto;
+  width: 68vmin;
+  height: 68vmin;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20vmin);
+  grid-auto-rows: 20vmin;
+  grid-gap: 4vmin;
+}
+.square
+{
+  background-color: var(--color-primary);
+  font-size: 15vmin;
+  line-height: 1;
+  padding: 0;
+  transition: 0.3s ease;
+}
+.square.O
+{
+  background-color: transparent;
+  color: var(--color-secondary);
+}
+.square.X
+{
+  background-color: transparent;
+  color: var(--color-accent);
+}
+@media only screen and (max-width: 900px), (orientation: portrait)
+{
+  .board
+  {
+    margin: 0 auto 5vmin;
+  }
+}
+/* Game Board End */
+
+/* Movements History Start */
+.game-info
+{
+  margin: 0 10vmin;
+  height: 68vmin;
+}
+.moves-header
+{
+  font-size: 4vmin;
+  color: var(--color-secondary);
+  margin-bottom: 4vmin;
+}
+.moves-history
+{
+  height: calc(100% - 8vmin);
+  overflow-y: auto;
+}
+.moves-history li
+{
+  color: black;
+  font-size: 3vmin;
+  margin-bottom: 3vmin;
+  list-style: none;
+  transition: color 0.3s ease;
+}
+.moves-history li:hover
+{
+  color: var(--color-secondary);
+}
+.moves-history li button
+{
+  cursor: pointer;
+  background-color: transparent;
+}
+@media only screen and (max-width: 900px), (orientation: portrait)
+{
+  .game-info{
+    margin: 0 auto 10vmin;
+    height: 20vmin;
+  }
+}
+/* Movements History End */

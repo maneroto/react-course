@@ -4,9 +4,10 @@ import './index.css';
 
 function Square(props)
 {
+    const classes = `square ${props.value == null? '' : props.value}`
     return (
         <button 
-            className="square" 
+            className={classes} 
             onClick={props.onClick}
         >
             {props.value}
@@ -26,22 +27,16 @@ class Board extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="board-row">
+            <div className='board'>
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
-                </div>
             </div>
         );
     }
@@ -105,7 +100,7 @@ class Game extends React.Component {
                 `Go to game start`;
             return (
                 <li key={move}>
-                    <button onClick = {() => this.jumpTo(move)}>
+                    <button onClick = {() => this.jumpTo(move)} className = 'history-move'>
                         {desc}
                     </button>
                 </li>
@@ -124,14 +119,19 @@ class Game extends React.Component {
         return (
             <div className="game">
                 <div className="game-board">
+                    <h1 className='status'>{ status }</h1>
+
+                    <div className="game-info">
+                        <h3 className='moves-header'>
+                            Movements History:
+                        </h3>
+                        <ul className='moves-history'>{ moves }</ul>
+                    </div>
+
                     <Board 
                         squares = {current.squares}
                         onClick = {(i) => this.handleClick(i)}
                     />
-                    </div>
-                    <div className="game-info">
-                    <div>{ status }</div>
-                    <ol>{ moves }</ol>
                 </div>
             </div>
         );
